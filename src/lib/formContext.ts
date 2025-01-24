@@ -18,6 +18,8 @@ export type FormContextType = {
       [key: string]: string;
     }>
   >;
+  showSamples: boolean;
+  setShowSamples: Dispatch<SetStateAction<boolean>>;
 };
 
 export const FormContext = createContext<FormContextType>({
@@ -27,6 +29,8 @@ export const FormContext = createContext<FormContextType>({
   setFinalText: () => {},
   placeholders: {},
   setPlaceholders: () => {},
+  showSamples: false,
+  setShowSamples: () => {},
 });
 
 export const useFormContext = () => useContext(FormContext);

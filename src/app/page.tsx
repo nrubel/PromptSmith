@@ -1,5 +1,4 @@
 import PromptForm from "@/components/form";
-import Header from "@/components/header";
 import Link from "next/link";
 
 export default function Home() {
@@ -10,7 +9,6 @@ export default function Home() {
           "p-6 bg-white shadow-xl rounded-sm border border-collapse border-gray-100 w-5/12"
         }
       >
-        <Header />
         <PromptForm />
         <footer>
           <div className="text-center mt-4 leading-6 text-gray-500 text-sm">

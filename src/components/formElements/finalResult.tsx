@@ -4,10 +4,18 @@ import { useFormContext } from "@/lib/formContext";
 import clsx from "clsx";
 import Link from "next/link";
 import { commonInputCls } from "./templateInput";
+import { useEffect, useState } from "react";
 
 export default function FinalResult() {
   const { template, finalText, placeholders } = useFormContext();
-  console.log(template, placeholders, finalText);
+  const [copied, setCopied] = useState<string | undefined>();
+  console.log(finalText, copied);
+
+  useEffect(() => {
+    if ((copied || "").trim() !== finalText.trim()) {
+      setCopied(undefined);
+    }
+  }, [finalText, copied]);
 
   if (
     !template ||
@@ -19,18 +27,64 @@ export default function FinalResult() {
 
   const askGptQuery = `https://chatgpt.com/?${new URLSearchParams({ q: finalText })}`;
   const copyText = () => {
-    navigator.clipboard.writeText(finalText);
+    navigator.clipboard
+      .writeText(finalText)
+      .then(() => setCopied(finalText))
+      .catch((e) => alert("Failed to copy text: " + e));
   };
 
   return (
     <div className="flex flex-col mt-3">
       <header className="flex justify-between items-center mb-2">
         <h2 className="text-xl font-bold text-gray-800">Final Prompt</h2>
-        <div>
-          <Link href={askGptQuery} target="_blank">
+        <div className="flex gap-3 items-center">
+          <Link
+            href={askGptQuery}
+            target="_blank"
+            className="rounded bg-indigo-500 py-1 px-4 flex flex-nowrap transition-all duration-150 hover:bg-red-600 text-white"
+          >
             AskGPT
           </Link>
-          <button onClick={copyText}>Copy</button>
+          <button
+            onClick={copyText}
+            disabled={!!copied}
+            className={clsx(
+              "rounded  py-1 px-4 flex flex-nowrap transition-all duration-150 text-white items-center gap-1",
+              !!copied ? "bg-gray-600" : "bg-indigo-500 hover:bg-red-600",
+            )}
+          >
+            {!!copied ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+              </svg>
+            )}
+            Copy
+          </button>
         </div>
       </header>
       <textarea

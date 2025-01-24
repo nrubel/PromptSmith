@@ -5,8 +5,11 @@ import { FormContext } from "@/lib/formContext";
 import { useState } from "react";
 import FinalResult from "./formElements/finalResult";
 import Placeholders from "./formElements/placeholders";
+import Header from "./header";
+import PromptSamples from "./prompts";
 
 export default function PromptForm() {
+  const [showSamples, setShowSamples] = useState<boolean>(false);
   const [template, setTemplate] = useState<string>("");
   const [finalText, setFinalText] = useState<string>("");
   const [placeholders, setPlaceholders] = useState<{ [key: string]: string }>(
@@ -22,12 +25,21 @@ export default function PromptForm() {
         setPlaceholders,
         finalText,
         setFinalText,
+        showSamples,
+        setShowSamples,
       }}
     >
       <div className="flex flex-col">
-        <TemplateInput />
-        <Placeholders />
-        <FinalResult />
+        <Header />
+        {showSamples ? (
+          <PromptSamples />
+        ) : (
+          <>
+            <TemplateInput />
+            <Placeholders />
+            <FinalResult />
+          </>
+        )}
       </div>
     </FormContext.Provider>
   );
