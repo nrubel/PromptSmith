@@ -14,7 +14,7 @@ export default function Home() {
           <div className="text-center mt-4 leading-6 text-gray-500 text-sm">
             Made with ❤️ by{" "}
             <Link
-              href={`https://nasiruddin.net`}
+              href={`https://nasiruddin.dev`}
               target="_blank"
               className="text-indigo-800 hover:underline hover:text-red-600 transition-all duration-150"
             >
