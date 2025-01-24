@@ -19,7 +19,7 @@ export default function PromptSamples() {
     <div className="mt-4">
       {Object.keys(samples).map((sample: string) => (
         <div key={`prompt-sample-group-${sample}`} className="mb-6">
-          <h2 className="mb-2 text-xl font-bold text-gray-700">
+          <h2 className="mb-2 text-lg md:text-xl font-bold text-gray-700">
             {camelCaseToHumanReadable(sample)}
           </h2>
           {samples[sample].map((val: string, i: number) => (

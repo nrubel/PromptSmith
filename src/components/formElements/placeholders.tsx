@@ -10,7 +10,7 @@ export default function Placeholders() {
     <>
       {Object.keys(placeholders).length > 0 && (
         <>
-          <h2 className="text-xl font-bold mt-3 mb-2 text-gray-800">
+          <h2 className="text-lg lg:text-xl font-bold mt-3 mb-2 text-gray-800">
             Fill Placeholders
           </h2>
           {Object.keys(placeholders).map((placeholder: string) => {

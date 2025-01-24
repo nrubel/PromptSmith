@@ -6,7 +6,7 @@ export default function Header() {
   const { showSamples, setShowSamples } = useFormContext();
   return (
     <header className="flex justify-between items-end">
-      <h1 className="text-2xl font-bold text-indigo-950">
+      <h1 className="text-xl md:text-2xl font-bold text-indigo-950">
         {showSamples ? "Prompt Samples" : "Prompt Smith"}
       </h1>
       <button

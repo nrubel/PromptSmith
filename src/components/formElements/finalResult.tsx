@@ -34,8 +34,10 @@ export default function FinalResult() {
 
   return (
     <div className="flex flex-col mt-3">
-      <header className="flex justify-between items-center mb-2">
-        <h2 className="text-xl font-bold text-gray-800">Final Prompt</h2>
+      <header className="flex justify-between sm:items-center mb-2 flex-col sm:flex-row gap-2">
+        <h2 className="text-lg lg:text-xl font-bold text-gray-800">
+          Final Prompt
+        </h2>
         <div className="flex gap-3 items-center">
           <Link
             href={askGptQuery}
